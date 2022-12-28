@@ -4,8 +4,8 @@ export class Player {
     
     #id
     #position
-    #direction
     #spawnPoint
+    #hp
 
     static spawnPoints = [
         new Vector2(50,80),
@@ -17,11 +17,10 @@ export class Player {
     constructor(id)
     {
         this.#id = id
-        this.#direction = "up"
+        this.#hp = 100
         //this.#spawnPoint = this.spawnRandom()
         this.#spawnPoint = this.spawnDefault()
-        // Copier la position de base 
-        this.#position = Object.assign({}, this.#spawnPoint) 
+        this.respawn()
     }
 
     getID()
@@ -42,6 +41,11 @@ export class Player {
     getSpawnPoint()
     {
         return this.#spawnPoint;
+    }
+
+    respawn(){
+         // Copier la position de base 
+         this.#position = Object.assign({}, this.#spawnPoint) 
     }
 
     spawnRandom()

@@ -27,7 +27,7 @@ function showConnections() {
   showConnections();
 
   let position = connections[socket.id].player.getPosition();
-  socket.emit("SocketID", {id: socket.id, x: position.x, y: position.y});
+  socket.emit("SocketID", {id: socket.id, x: position.x, y: position.y, map: world.getMap()});
 
   let currentPlayers = [] 
   Object.values(connections).forEach((object)=>{
@@ -43,6 +43,15 @@ function showConnections() {
     data.id = socket.id;
     socket.broadcast.emit('playerMoved', data);
     connections[socket.id].player.setPosition(data.x,data.y);
+  })
+
+  socket.on('playerDead', (data) => {
+    data = {}
+    data.id = socket.id;
+    connections[socket.id].player.respawn();
+    data.x = connections[socket.id].player.getPosition().x
+    data.y = connections[socket.id].player.getPosition().y
+    socket.broadcast.emit('playerMoved', data);
   })
 
   socket.on("disconnect", () => {

@@ -10,6 +10,7 @@
   "author": "Félix Dumas-Lavoie",
   "license": "ISC",
   "dependencies": {
+    "rectangles": "0.0.4",
     "socket.io": "^4.5.1",
     "vector2-node": "0.0.3"
   }
