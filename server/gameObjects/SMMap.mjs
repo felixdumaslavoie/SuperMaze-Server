@@ -37,7 +37,7 @@ export class SMMap {
         for (let i = 0; i < this.#width; i++) {
             this.#tiles[i] = []
             for (let j = 0; j < this.#height; j++) {
-                if (j == 0 || i == 0 || j ==  this.#height -1 || i == this.#width -1)
+                if (j == 0 && i == 0 || j == 0 && i == this.#width -1 ||  i == 0 && j == this.#height -1 || i == this.#width -1 && j == this.#height -1)
                 {
                     this.#tiles[i][j] = new Tile(this.#tileWidth, this.#tileWidth * i, this.#tileWidth * j,  this.#tileList.getTypes("metal"));
                 }	
@@ -54,4 +54,22 @@ export class SMMap {
         return this.#tiles;
     }
 
+    addTiles(arrayTilesPosition)
+    {
+        let refused = false;
+        arrayTilesPosition.forEach(position => {
+            if (this.#tiles[position.x][position.y].getType() == this.#tileList.getTypes("metal"))
+            {
+                refused = true;
+            }this.#tileList.getTypes("metal")
+        });
+
+        if (!refused)
+        {
+            arrayTilesPosition.forEach(position => { 
+                this.#tiles[position.x][position.y] =  new Tile(this.#tileWidth, this.#tileWidth * position.x, this.#tileWidth * position.y,  this.#tileList.getTypes("metal"));
+            });
+        }
+        return refused;
+    }
 }

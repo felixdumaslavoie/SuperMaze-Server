@@ -19,5 +19,10 @@ export class Tile {
     {
         return {x1: this._x, y1 : this._y, x2 : this._x + this._width, y2 : this._y + this._width}
     }
+
+    getType()
+    {
+        return this._type;
+    }
     
 }

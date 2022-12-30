@@ -27,4 +27,9 @@ export class World {
         return this.#map.getTilesArray();
     }
 
+    addTiles(arrayTiles)
+    {
+       return this.#map.addTiles(arrayTiles);
+    }
+
 }

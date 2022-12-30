@@ -54,6 +54,16 @@ function showConnections() {
     socket.broadcast.emit('playerMoved', data);
   })
 
+  socket.on('addingTiles', (data) =>{
+    let response = world.addTiles(data);
+    data.id = socket.id;
+    if (!response)
+    {
+      socket.emit('tilesAdded', data);
+      socket.broadcast.emit('tilesAdded', data);
+    }
+  });
+
   socket.on("disconnect", () => {
     delete connections[socket.id];
     socket.broadcast.emit("playerDisconnected", {id: socket.id});
